@@ -12,7 +12,7 @@ An ASP.NET Core MVC web application demonstrating **Role-Based Access Control (R
 
 ## Technologies
 
-- ASP.NET Core MVC (.NET 6/7)
+- ASP.NET Core MVC (.NET 8)
 - ASP.NET Core Identity with EF Core
 - SQL Server (LocalDB)
 - Bootstrap 5 for basic styling
