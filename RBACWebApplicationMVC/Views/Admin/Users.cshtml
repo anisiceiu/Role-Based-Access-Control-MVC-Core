@@ -1,0 +1,52 @@
+﻿@model List<RBACWebApplicationMVC.Models.UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "User Role Management";
+    var allRoles = ViewBag.AllRoles as List<string>;
+}
+
+<h2>User Role Management</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Assign Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    @if (user.Roles != null && user.Roles.Count > 0)
+                    {
+                        @string.Join(", ", user.Roles)
+                    }
+                    else
+                    {
+                        <em>No roles assigned</em>
+                    }
+                </td>
+                <td>
+                    <form asp-action="AssignRole" method="post" style="display:inline-flex; gap:5px;">
+                        <input type="hidden" name="userId" value="@user.UserId" />
+                        <select name="role" class="form-select form-select-sm" style="width:auto;">
+                            <option value="">Select Role</option>
+                            @foreach (var role in allRoles)
+                            {
+                                if (user.Roles == null || !user.Roles.Contains(role))
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm">Assign</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
